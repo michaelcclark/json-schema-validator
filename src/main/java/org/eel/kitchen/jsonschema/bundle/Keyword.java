@@ -20,6 +20,7 @@ package org.eel.kitchen.jsonschema.bundle;
 import com.google.common.base.Preconditions;
 import org.eel.kitchen.jsonschema.keyword.KeywordValidator;
 import org.eel.kitchen.jsonschema.syntax.SyntaxChecker;
+import org.eel.kitchen.jsonschema.validator2.Validator;
 
 /**
  * Class used to build a new keyword
@@ -34,12 +35,14 @@ public final class Keyword
     private final String name;
     private final SyntaxChecker syntaxChecker;
     private final Class<? extends KeywordValidator> validatorClass;
+    private final Class<? extends Validator> validator;
 
     private Keyword(final Builder builder)
     {
         name = builder.keyword;
         syntaxChecker = builder.syntaxChecker;
         validatorClass = builder.validatorClass;
+        validator = builder.validator;
     }
 
     public String getName()
@@ -57,11 +60,17 @@ public final class Keyword
         return validatorClass;
     }
 
+    public Class<? extends Validator> getValidator()
+    {
+        return validator;
+    }
+
     public static final class Builder
     {
         private final String keyword;
         private SyntaxChecker syntaxChecker;
         private Class<? extends KeywordValidator> validatorClass;
+        private Class<? extends Validator> validator;
 
         private Builder(final String keyword)
         {
@@ -105,6 +114,12 @@ public final class Keyword
             final Class<? extends KeywordValidator> validatorClass)
         {
             this.validatorClass = validatorClass;
+            return this;
+        }
+
+        public Builder withValidator(final Class<? extends Validator> validator)
+        {
+            this.validator = validator;
             return this;
         }
 

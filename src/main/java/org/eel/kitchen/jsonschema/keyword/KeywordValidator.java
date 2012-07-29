@@ -19,7 +19,9 @@ package org.eel.kitchen.jsonschema.keyword;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import org.eel.kitchen.jsonschema.ValidationContext;
+import org.eel.kitchen.jsonschema.ValidationReport;
 import org.eel.kitchen.jsonschema.util.NodeType;
+import org.eel.kitchen.jsonschema.validator2.Validator;
 
 import java.util.Collections;
 import java.util.EnumSet;
@@ -35,6 +37,7 @@ import java.util.EnumSet;
  * validation succeeds.</p>
  */
 public abstract class KeywordValidator
+    implements Validator
 {
     /**
      * What types this keyword validates
@@ -80,4 +83,18 @@ public abstract class KeywordValidator
      */
     protected abstract void validate(final ValidationContext context,
         final JsonNode instance);
+
+    @Override
+    public boolean validate(final ValidationReport report,
+        final JsonNode instance)
+    {
+        // TODO
+        return false;
+    }
+
+    @Override
+    public Validator next()
+    {
+        throw new IllegalStateException();
+    }
 }
