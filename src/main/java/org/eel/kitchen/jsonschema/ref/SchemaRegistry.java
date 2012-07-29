@@ -67,7 +67,7 @@ public final class SchemaRegistry
         return container;
     }
 
-    SchemaContainer get(final URI uri)
+    public SchemaContainer get(final URI uri)
         throws JsonSchemaException
     {
         try {
