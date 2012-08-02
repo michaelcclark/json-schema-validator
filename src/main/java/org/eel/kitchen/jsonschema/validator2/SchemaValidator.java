@@ -29,6 +29,17 @@ import org.eel.kitchen.jsonschema.schema.SchemaNode;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Initial validator -- each schema validator MUST instantiate one of these
+ * first
+ *
+ * <p>Its role is to gather whatever elements are obtained from a context,
+ * whether it be initial or validator supplied, and instantiate a {@link
+ * RefResolverValidator} from then on.</p>
+ *
+ * <p>Among other things, it means that this is the place where malformed
+ * JSON input will be detected.</p>
+ */
 public final class SchemaValidator
     implements Validator
 {

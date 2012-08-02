@@ -29,6 +29,20 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Set;
 
+/**
+ * {@code $ref} validator
+ *
+ * <p>In essence, this validator calls itself recursively until its input
+ * is no longer a {@code $ref} anymore.</p>
+ *
+ * <p>This validator will also bail out if it happens that whatever URI
+ * {@code $ref} points to is either unreachable, or not even JSON to begin
+ * with.</p>
+ *
+ * <p>If it succeeds calling itself until it is able to fetch a JSON
+ * document (potentially cached, see {@link SchemaRegistry}),
+ * then it spawns a {@link SyntaxCheckerValidator}.</p>
+ */
 final class RefResolverValidator
     implements Validator
 {

@@ -45,6 +45,11 @@ final class SyntaxCheckerValidator
         final SyntaxChecker checker = buildingBlocks.getSyntaxChecker();
         checker.checkSyntax(messages, context.getNode().getNode());
         report.addMessages(messages);
+        /*
+         * Continuation is quite simple: we should only ever continue if the
+         * schema is considered valid -- in other words,
+         * syntax validation returned no (error) messages.
+         */
         return messages.isEmpty();
     }
 
